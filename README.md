@@ -1,4 +1,4 @@
-# Ecommecer shopping cart - Redux
+# Ecommerce shopping cart - Redux
 
 ---
 

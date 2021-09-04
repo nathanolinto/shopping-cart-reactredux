@@ -22,8 +22,8 @@ function Product ({product}: ProductProps) {
                 <p className="my-3 h-12 line-clamp-2">{updatedProduct.title}</p>
             </a>
             <div className="flex items-center">
-                <div className="flex p-2 w-full justify-center">{updatedProduct.formatedPrice}</div>
-                <button className="flex justify-center bg-yellow-500 p-2 w-full">Add to Cart</button>
+                <div className="flex flex-1 justify-center p-2">{updatedProduct.formatedPrice}</div>
+                <button className="flex flex-1 justify-center bg-yellow-500 p-2">Add to Cart</button>
             </div>
         </div>
     );
