@@ -1,14 +1,18 @@
-interface ProductProps {
-    product: {
-        id: number;
-        title: string;
-        price: number;
-        category: string;
-        image: string;
-    }
+interface Product {
+    id: number;
+    title: string;
+    price: number;
+    category: string;
+    image: string;
 }
 
-function Product ({product}: ProductProps) {
+interface ProductProps {
+    product: Product,
+    addProductCart: (product: Product) => void;
+
+}
+
+function Product ({product, addProductCart}: ProductProps) {
     const updatedProduct = {
         ...product, 
         formatedPrice: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price),
@@ -23,7 +27,7 @@ function Product ({product}: ProductProps) {
             </a>
             <div className="flex items-center">
                 <div className="flex flex-1 justify-center p-2">{updatedProduct.formatedPrice}</div>
-                <button className="flex flex-1 justify-center bg-yellow-500 p-2">Add to Cart</button>
+                <button className="flex flex-1 justify-center bg-yellow-500 p-2" onClick={()=>addProductCart(updatedProduct)} >Add to Cart</button>
             </div>
         </div>
     );
