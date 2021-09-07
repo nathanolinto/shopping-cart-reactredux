@@ -4,6 +4,11 @@ import Header from './components/Header';
 import ProductFeed from './components/Product-Feed';
 import ProductsFilter from './components/Products-Filter';
 import Card from "./components/Cart"
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllProducts } from './store/products/products.selectors';
+import { getAllProducts } from './store/products/products.actions';
+
+
 
 interface Product {
     id: number;
@@ -18,11 +23,22 @@ interface ItemCart {
 }
 
 function App() {
+
+    // const dispath = useDispatch();
+    // const productsRedux = useSelector(selectAllProducts);
+    // console.log(productsRedux)
+    // useEffect(()=> {
+    //     dispath(getAllProducts());
+    // }, [])
+    
+
     const [products, setProducts] = useState<Product[]>([]);
     const [updatedProducts, setupdatedProducts] = useState<Product[]>([])
     const [categories, setCategories] = useState<string[]>([]);
     const [itemCart, setItemCart] = useState<ItemCart[]>([]);
+
     useEffect(() => {
+
         const fetchData = async () => {
             const result = await axios.get("https://fakestoreapi.com/products");
             setProducts(result.data);
@@ -33,7 +49,9 @@ function App() {
             setCategories(initCategories.filter((el: string, i: number, arr: string) => arr.indexOf(el) === i));
         }
         fetchData();
+
     }, []);
+
 
     function handleFilterProducts(category: string) {
         setupdatedProducts(products.filter(product => product.category.indexOf(category) >= 0));
@@ -45,9 +63,9 @@ function App() {
         if (itemCartIndex >= 0) {
             updatedItemCart[itemCartIndex].amount++;
             setItemCart(updatedItemCart);
-            return ;
-        } 
-        
+            return;
+        }
+
         setItemCart([...itemCart, { product, amount: 1 }]);
 
     }
